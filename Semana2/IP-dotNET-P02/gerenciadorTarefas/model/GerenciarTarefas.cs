@@ -141,14 +141,15 @@ public class GerenciarTarefas
     {
         try
         {
-            Console.Clear();
-            Console.WriteLine("Qual tarefa deseja buscar?");
-            Console.Write("Título da tarefa: ");
-            string? str = Console.ReadLine();
-            if (!string.IsNullOrEmpty(str))
+            if (tarefas.Count > 0)
             {
-                if (tarefas.Count > 0)
+                Console.Clear();
+                Console.WriteLine("Qual tarefa deseja buscar?");
+                Console.Write("Título da tarefa: ");
+                string? str = Console.ReadLine();
+                if (!string.IsNullOrEmpty(str))
                 {
+
                     foreach (Tarefa tarefa in tarefas)
                     {
                         if (tarefa.Titulo!.Equals(str))
@@ -159,10 +160,21 @@ public class GerenciarTarefas
                             Console.WriteLine("É sua tarefa?(s/n)");
                             if (Console.ReadLine()!.Equals("s"))
                                 return tarefas.IndexOf(tarefa);
+                            else
+                            {
+                                Console.WriteLine("Deseja Tentar novamente? se desejar aperte enter\nCaso não desejar, digite 0 para voltar ao menu anterior: ");
+                                if (int.Parse(Console.ReadLine()!) != 0)
+                                {
+                                    BuscarTarefa();
+                                }
+                                else return -2;
+                            }
                         }
                     }
+
                 }
             }
+            else return -3;
         }
         catch (Exception)
         {
@@ -174,9 +186,42 @@ public class GerenciarTarefas
                 {
                     BuscarTarefa();
                 }
-            }catch (Exception){BuscarTarefa();}
+            }
+            catch (Exception) { BuscarTarefa(); }
         }
         return -1;
     }
 
+    public void ExcluirTarefa()
+    {
+        int index = BuscarTarefa();
+        if (index == -1)
+        {
+            Console.WriteLine("Tarefa não encontrada!");
+        }
+        else if (index == -2)
+            Console.WriteLine("Desitiu!!");
+        else if (index == -3)
+            Console.WriteLine("Lista de tarefas vazia!!");
+        else
+        {
+            try
+            {
+                Console.Clear();
+                tarefas[index].Visualizar();
+                Console.WriteLine("Tem certeza que deseja excluir?(s/n)");
+                if (Console.ReadLine()!.Equals("s"))
+                    tarefas.RemoveAt(index);
+                else
+                {
+                    Console.WriteLine("Desitiu!!");
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Algo deu errado! Tente novamente !!.");
+            }
+        }
+
+    }
 }

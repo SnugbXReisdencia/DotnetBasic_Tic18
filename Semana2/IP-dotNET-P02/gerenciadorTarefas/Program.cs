@@ -49,6 +49,8 @@ do{
             }while(opc2 != 0);
             break;
         case 4:
+            ger_Tarefas.ExcluirTarefa();
+            pausar();
             break;
         case 0:
             break;
