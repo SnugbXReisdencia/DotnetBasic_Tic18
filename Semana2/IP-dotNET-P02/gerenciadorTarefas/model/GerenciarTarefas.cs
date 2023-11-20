@@ -224,4 +224,39 @@ public class GerenciarTarefas
         }
 
     }
+
+    public void ConcluirTarefa()
+    {
+        int index = BuscarTarefa();
+        if (index == -1)
+        {
+            Console.WriteLine("Tarefa não encontrada!");
+        }
+        else if (index == -2)
+            Console.WriteLine("Desitiu!!");
+        else if (index == -3)
+            Console.WriteLine("Lista de tarefas vazia!!");
+        else
+        {
+            try
+            {
+                Console.Clear();
+                tarefas[index].Visualizar();
+                Console.WriteLine("Tem certeza que deseja concluir?(s/n)");
+                if (Console.ReadLine()!.Equals("s"))
+                {
+                    tarefas[index].Status = true;
+                    Console.WriteLine("Tarefa concluída com sucesso!");
+                }
+                else
+                {
+                    Console.WriteLine("Desitiu!!");
+                }
+            }catch (Exception)
+            {
+                Console.WriteLine("Algo deu errado! Tente novamente !!.");
+            }
+        }
+    }
+
 }

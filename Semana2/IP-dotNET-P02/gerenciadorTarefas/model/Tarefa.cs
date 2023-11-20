@@ -2,10 +2,10 @@
 
 public class Tarefa
 {
-    string titulo;
-    string descricao;
-    DateTime data_Vencimento;
-    bool status;
+    private string titulo;
+    private string descricao;
+    private DateTime data_Vencimento;
+    private bool status;
 
     public Tarefa(string titulo, string descricao, DateTime data_Vencimento)
     {

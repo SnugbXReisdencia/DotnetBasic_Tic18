@@ -21,6 +21,8 @@ do{
             ger_Tarefas.CadastrarTarefa();
             break;
         case 2:
+            ger_Tarefas.ConcluirTarefa();
+            pausar();
             break;
         case 3:
             do{
