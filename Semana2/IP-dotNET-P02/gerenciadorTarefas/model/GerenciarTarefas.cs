@@ -16,6 +16,12 @@ public class GerenciarTarefas
         {
             Console.Write("Título: ");
             tarefa.Titulo = Console.ReadLine();
+            if (verificarTitulo(tarefa.Titulo!))
+            {
+                Console.WriteLine("Já existe uma tarefa com este título, tente novamente!");
+                pausar();
+                return;
+            }
             Console.Write("Descrição: ");
             tarefa.Descricao = Console.ReadLine();
             Console.Write("Data de Vencimento (dd/MM/yyyy): ");
@@ -38,6 +44,24 @@ public class GerenciarTarefas
                 CadastrarTarefa();
             }
         }
+    }
+    public bool verificarTitulo(string t)
+    {
+        try
+        {
+            foreach (Tarefa tarefa in tarefas)
+            {
+                if (tarefa.Titulo!.Equals(t))
+                {
+                    return true;
+                }
+            }
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+        return false;
     }
     public int qtd_TarefasPendentes()
     {
@@ -252,11 +276,67 @@ public class GerenciarTarefas
                 {
                     Console.WriteLine("Desitiu!!");
                 }
-            }catch (Exception)
+            }
+            catch (Exception)
             {
                 Console.WriteLine("Algo deu errado! Tente novamente !!.");
             }
         }
+    }
+
+    public void EditarTarefa()
+    {
+        int index = BuscarTarefa();
+        if (index == -1)
+        {
+            Console.WriteLine("Tarefa não encontrada!");
+        }
+        else if (index == -2)
+            Console.WriteLine("Desitiu!!");
+        else if (index == -3)
+            Console.WriteLine("Lista de tarefas vazia!!");
+        else
+        {
+            try
+            {
+                Console.Clear();
+                tarefas[index].Visualizar();
+                string? str = "";
+                Console.WriteLine("Digite a nova descrição da tarefa: ");
+                str = Console.ReadLine();
+                if (!string.IsNullOrEmpty(str))
+                {
+                    tarefas[index].Descricao = str;
+                }
+                Console.WriteLine("Digite a nova data de vencimento da tarefa (dd/MM/yyyy): ");
+                str = Console.ReadLine();
+                if (!string.IsNullOrEmpty(str))
+                {
+                    tarefas[index].Data_Vencimento = DateTime.ParseExact(str, "dd/MM/yyyy", null);
+                }
+                Console.WriteLine("Informe o status da tarefa : \ns = Concluída\nn = Pendente\nObs: Qualquer outro valor informado = Pendente \n Opção: ");
+                str = Console.ReadLine()!;
+                if (str.Equals("s")){
+                    tarefas[index].Status = true;
+                }else if(str.Equals("n")){
+                    tarefas[index].Status = false;
+                }else{
+                    tarefas[index].Status = false;
+                }
+                Console.WriteLine("Tarefa editada com sucesso!");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Algo deu errado! Tente novamente !!.");
+            }
+        }
+
+    }
+
+    public void pausar()
+    {
+        Console.WriteLine("Pressione Enter para continuar...");
+        Console.ReadLine();
     }
 
 }

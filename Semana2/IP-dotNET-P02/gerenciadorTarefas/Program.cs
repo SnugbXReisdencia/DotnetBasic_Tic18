@@ -54,6 +54,10 @@ do{
             ger_Tarefas.ExcluirTarefa();
             pausar();
             break;
+        case 5:
+            ger_Tarefas.EditarTarefa();
+            pausar();
+            break;
         case 0:
             break;
         default:
@@ -67,6 +71,7 @@ int menu(){
     Console.WriteLine("2 - Concluir Tarefa");
     Console.WriteLine("3 - Dados das Tarefas");
     Console.WriteLine("4 - Excluir Tarefa");
+    Console.WriteLine("5 - Editar Tarefa");
     Console.WriteLine("0 - Sair");
     Console.Write("Opção: ");
     return int.Parse(Console.ReadLine()!);
@@ -76,7 +81,7 @@ int menu_Listar(){
     Console.WriteLine("1 - Estadisticas das Tarefas");
     Console.WriteLine("2 - Tarefas pendentes");
     Console.WriteLine("3 - Tarefas concluídas");
-    Console.WriteLine("0 - Sair");
+    Console.WriteLine("0 - Voltar");
     Console.Write("Opção: ");
     return int.Parse(Console.ReadLine()!);
 }
