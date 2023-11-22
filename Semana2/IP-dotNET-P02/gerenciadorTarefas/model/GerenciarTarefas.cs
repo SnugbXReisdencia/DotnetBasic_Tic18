@@ -26,7 +26,7 @@ public class GerenciarTarefas
             tarefa.Descricao = Console.ReadLine();
             Console.Write("Data de Vencimento (dd/MM/yyyy): ");
 
-            tarefa.Data_Vencimento = DateTime.ParseExact(Console.ReadLine()!, "dd/MM/yyyy", null);
+            tarefa.Data_Vencimento = DateTime.Parse(Console.ReadLine()!);
             tarefas.Add(tarefa);
         }
         catch (Exception)

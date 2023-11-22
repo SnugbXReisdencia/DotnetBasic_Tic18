@@ -1,7 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.Globalization;
+// See https://aka.ms/new-console-template for more information
 using System.ComponentModel.Design;
 using System.Reflection.Emit;
 using gerenciadorTarefas;
+
+CultureInfo.CurrentCulture = new CultureInfo("pt-BR");
 
 Console.Clear();
 /*
@@ -59,6 +62,7 @@ do{
             pausar();
             break;
         case 0:
+            Console.Clear();
             break;
         default:
             Console.WriteLine("Opção inválida!");
