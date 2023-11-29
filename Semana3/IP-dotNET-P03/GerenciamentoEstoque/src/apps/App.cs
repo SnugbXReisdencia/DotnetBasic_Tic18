@@ -358,7 +358,7 @@ public class App
     }
     public string qtd_espacos(int qtd){
         var espacos = "";
-        var qtd_esp = 15 - qtd;
+        var qtd_esp = 20 - qtd;
         for (int i = 0; i < qtd_esp; i++){
             espacos += " ";
         }
