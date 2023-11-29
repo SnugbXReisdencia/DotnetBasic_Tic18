@@ -57,10 +57,5 @@ public class AppMedico
         medicos.Add(medico);
     }
 
-    public void imprimirMedicos(Medico medicos){
-        Console.WriteLine("Nome: " + medicos.Nome);
-        Console.WriteLine("Cpf: " + medicos.Cpf);
-        Console.WriteLine("Data de Nascimento: " + medicos.DataNascimento);
-        Console.WriteLine("CRM: " + medicos.Crm);
-    }
+    
 }

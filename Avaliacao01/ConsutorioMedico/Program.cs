@@ -6,24 +6,30 @@ using Modelos;
 List<Paciente> pacientes = new List<Paciente>();
 List<Medico> medicos = new List<Medico>();
 
+
+
 int opc;
 do{
-    opc = appMedico.menu();
+    opc = Controller.app.menu();
     switch(opc){
         case 1:
-            appMedico.App.criarMedico(medicos);
+            Controller.AppMedico.criarMedico(medicos);
             break;
         case 2:
-            appMedico.App.criarPaciente(pacientes);
+            Controller.AppPaciente.criarPaciente(pacientes);
             break;
         case 3:
-            appMedico.App.imprimirMedicos(medicos);
+            foreach(var medico in medicos){
+                medico.imprimirMedicos(medico);    
+            }
             break;
         case 4:
-            appMedico.App.imprimirPacientes(pacientes);
+            foreach (var paciente in pacientes){
+                paciente.imprimirPacientes(paciente);
+            }
             break;
         case 5:
-            appMedico.App.menuRelatorio();
+            Controller.app.menuRelatorio();
             break;
         case 0:
             Console.WriteLine("Saindo...");
