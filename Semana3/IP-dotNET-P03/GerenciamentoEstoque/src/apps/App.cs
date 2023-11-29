@@ -349,11 +349,20 @@ public class App
         var valorTotal = estoque.Sum(x => x.qtd * x.preco);
         Console.WriteLine("############# RELATORIO GERAL #############");
         Console.WriteLine($"Valor total em estoque por produtos:\n");
-        Console.WriteLine($"Nome            Quantidade     Preço       Total");
+        Console.WriteLine($"Nome {qtd_espacos("Nome".Length)+"|"} Quantidade{qtd_espacos("Quantidade".Length)+"|"} Preço {qtd_espacos("Preço".Length-4)+"|"} Total");
         foreach (var item in estoque){
-            Console.WriteLine($"{item.nome}            {item.qtd}     R$ {item.preco}       R$ {item.preco * item.qtd}");
+            Console.WriteLine($"{item.nome} {qtd_espacos(item.nome.Length)+"|"} {item.qtd}{qtd_espacos(item.qtd.ToString().Length)+"|"} R$ {item.preco} {qtd_espacos(item.preco.ToString().Length)+"|"} R$ {item.preco * item.qtd}");
         }
         Console.WriteLine($"\nValor total em estoque: R$ {valorTotal}");
         Util.pausar();
+    }
+    public string qtd_espacos(int qtd){
+        var espacos = "";
+        var qtd_esp = 15 - qtd;
+        for (int i = 0; i < qtd_esp; i++){
+            espacos += " ";
+        }
+        return espacos;
+
     }
 }
