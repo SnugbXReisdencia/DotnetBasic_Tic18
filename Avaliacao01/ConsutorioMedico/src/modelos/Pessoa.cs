@@ -2,7 +2,13 @@ namespace Modelos;
 public class Pessoa
 {
     public String Nome { get; set; } = "";
-    public String Cpf { get { return this.Cpf;} set { if (ValidarCpf(Cpf)) { this.Cpf = Cpf;} } }
+    public String Cpf { 
+        get { return this.Cpf;} 
+        set { 
+            if (ValidarCpf(Cpf)) { this.Cpf = Cpf;}
+            else { throw new Exception("Cpf invalido");} 
+        }
+    }
 
     public DateTime DataNascimento { get; set; }
 
