@@ -1,1 +1,1 @@
-# Esse repositorio contem arquivos de todas as atividades realizadas da disciplina de DotNet individual.
+# Essa Branch contem arquivos da Avaliação 01 realizadas da disciplina de DotNet individual.
