@@ -127,6 +127,7 @@ public class App
             Console.WriteLine("Estoque atual: " + produto.qtd);
             Console.WriteLine("1 - Adicionar quantidade em estoque");
             Console.WriteLine("2 - Remover quantidade em estoque");
+            Console.WriteLine("3 - Ver produto");
             Console.WriteLine("0 - Voltar");
             return int.Parse(Console.ReadLine()!);
         }
@@ -136,6 +137,16 @@ public class App
             Util.pausar();
             return -1;
         }
+    }
+
+    public void verProduto((int cod, string nome, int qtd, double preco) produto)
+    {
+
+        Console.WriteLine($"Nome: {produto.nome}");
+        Console.WriteLine($"Código: {produto.cod}");
+        Console.WriteLine($"Quantidade em estoque: {produto.qtd}");
+        Console.WriteLine($"Preço unitário: {produto.preco}");
+
     }
     public List<(int cod, string nome, int qtd, double preco)> add_Qtd((int cod, string nome, int qtd, double preco) produto, List<(int cod, string nome, int qtd, double preco)> estoque)
     {
@@ -250,5 +261,99 @@ public class App
             Util.pausar();
             return menuRelatorio();
         }
+    }
+    public void rela_Filtrado_estoque(List<(int cod, string nome, int qtd, double preco)> estoque)
+    {
+        Console.WriteLine("############# RELATORIO DE PRODUTOS ABAIXO DE UM LIMITE #############");
+        try
+        {
+            Console.Write("Informe o Limite: ");
+            if (int.TryParse(Console.ReadLine(), out var limite))
+            {
+                var produtos = estoque
+                .Where(x => x.qtd < limite)
+                .OrderBy(x => x.qtd)
+                .ToList();
+
+                Console.WriteLine($"PRODUTOS ABAIXO DO LIMITE {limite}: ");
+                if (produtos.Count == 0)
+                {
+                    Console.WriteLine("Nao foi encontrado nenhum produto com quantidade abaixo do limite informado!!");
+                }
+                else
+                {
+                    foreach (var item in produtos)
+                    {
+                        verProduto(item);
+                        Console.WriteLine("\n---------------------------------");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("O valor informado é inválido!");
+            }
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("O valor informado é inválido!");
+        }
+        Util.pausar();
+    }
+
+    public void rela_Filtrado_Valor(List<(int cod, string nome, int qtd, double preco)> estoque)
+    {
+        Console.WriteLine("############# RELATORIO DE PRODUTOS ABAIXO DE UM LIMITE #############");
+        try
+        {
+            var produtos = new List<(int cod, string nome, int qtd, double preco)>();
+            Console.Write("Informe o valor min: ");
+            if (int.TryParse(Console.ReadLine(), out var min))
+            {
+                Console.Write("Informe o valor max: ");
+                if (int.TryParse(Console.ReadLine(), out var max))
+                {
+                    produtos = estoque.Where(x => x.preco >= min && x.preco <= max)
+                    .OrderBy(x => x.preco)
+                    .ToList();
+                    
+                }
+
+                Console.WriteLine($"PRODUTOS COM VALOR ENTRE {min} E {max}: ");
+                if (produtos.Count == 0)
+                {
+                    Console.WriteLine("Nao foi encontrado nenhum produto com valor entre os limites informados!!");
+                }
+                else
+                {
+                    foreach (var item in produtos)
+                    {
+                        verProduto(item);
+                        Console.WriteLine("\n---------------------------------");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("O valor informado é inválido!");
+            }
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("O valor informado é inválido!");
+        }
+        Util.pausar();
+    }
+
+    public void relatorio_Geral(List<(int cod, string nome, int qtd, double preco)> estoque){
+        var valorTotal = estoque.Sum(x => x.qtd * x.preco);
+        Console.WriteLine("############# RELATORIO GERAL #############");
+        Console.WriteLine($"Valor total em estoque por produtos:\n");
+        Console.WriteLine($"Nome            Quantidade     Preço       Total");
+        foreach (var item in estoque){
+            Console.WriteLine($"{item.nome}            {item.qtd}     R$ {item.preco}       R$ {item.preco * item.qtd}");
+        }
+        Console.WriteLine($"\nValor total em estoque: R$ {valorTotal}");
+        Util.pausar();
     }
 }

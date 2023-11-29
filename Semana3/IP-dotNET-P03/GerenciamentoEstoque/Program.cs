@@ -60,6 +60,12 @@ while (true)
                                     estoque = app.remove_Qtd(produto, estoque);
                                     produto = estoque.Find(x => x.cod == produto.cod)!;
                                     break;
+                                case 3:
+                                    Util.limpar_tela();
+                                    Console.WriteLine("############# DETALHES DO PRODUTO #############");
+                                    app.verProduto(produto);
+                                    Util.pausar();
+                                    break;
                                 default:
                                     Console.WriteLine("Opção inválida!!!");
                                     Util.pausar();
@@ -72,14 +78,34 @@ while (true)
                         Util.limpar_tela();
                         app.excluirProduto(estoque);
                         break;
-
-
-
+                    default:
+                        Console.WriteLine("Opção inválida!!!");
+                        Util.pausar();
+                        break;
                 }
             } while (opc != 0);
             break;
         case 2:
-            app.menuRelatorio();
+            do{
+                opc = app.menuRelatorio();
+                switch (opc){
+                    case 0:
+                        break;
+                    case 1:
+                        app.rela_Filtrado_estoque(estoque);
+                        break;
+                    case 2:
+                        app.rela_Filtrado_Valor(estoque);
+                        break;
+                    case 3:
+                        app.relatorio_Geral(estoque);
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida!!!");
+                        Util.pausar();
+                        break;
+                }
+            }while(opc != 0);
             break;
         default:
             Console.WriteLine("Opção inválida!!!");
