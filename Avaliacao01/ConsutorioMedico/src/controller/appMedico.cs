@@ -2,37 +2,81 @@ namespace Controller;
 using Modelos;
 public class appMedico
 {
-    public static Medico  criarMedico(List<Medico> medicos){
+    public static bool  criarMedico(List<Medico> medicos){
         var medico = new Medico();
-        Console.WriteLine("Digite o nome do medico");
+        var xx  = true;
         try{
-            medico.Nome = Console.ReadLine()!;
+            Console.WriteLine("Digite o nome do medico");
+            var Nome = Console.ReadLine()!;
         }catch(Exception){
             Console.WriteLine("Nome invalido");
+            return false;
         }
         try{
             Console.WriteLine("Digite o cpf do medico");
-            medico.Cpf = Console.ReadLine()!;
+            var Cpf = Console.ReadLine()!;
             medicos.ForEach(x => {
-                if(x.Cpf == medico.Cpf){
-                    throw new Exception("Cpf ja existe");
+                if(x.Cpf == Cpf){
+                    Console.WriteLine("Cpf ja existe");
+                    xx= false;
                 }
             });
-        }catch(Exception e){
-            Console.WriteLine(e.Message);
+            if(xx){
+                medico.Cpf = Cpf;
+            }else{
+                return false;
+            }
+        }catch(Exception){
+            Console.WriteLine("CPF informado invalido");
+        }
+        
+        Console.WriteLine("Digite o nome do medico");
+        try{
+            var Nome = Console.ReadLine()!;
+        }catch(Exception){
+            Console.WriteLine("Nome invalido");
+            return false;
+        }
+        try{
+            Console.WriteLine("Digite o cpf do medico");
+            var Cpf = Console.ReadLine()!;
+            medicos.ForEach(x => {
+                if(x.Cpf == Cpf){
+                    Console.WriteLine("Cpf ja existe");
+                }else{
+                    medico.Cpf = Cpf;
+                }
+            });
+        }catch(Exception){
+            Console.WriteLine("CPF informado invalido");
+            return false;
         }
         try{
             Console.WriteLine("Digite a data de nascimento do medico (dd/MM/yyyy): ");
-            medico.DataNascimento = DateTime.Parse(Console.ReadLine()!);
+            var DataNascimento = DateTime.Parse(Console.ReadLine()!);
         }catch(Exception){
             Console.WriteLine("Data de nascimento invalida");
+            return false;
         }
         try{
+            xx = true;
             Console.WriteLine("Digite o crm do medico");
-            medico.Crm = Console.ReadLine()!;
+            var Crm = Console.ReadLine()!;
+            medicos.ForEach(x => {
+                if(x.Crm == Crm){
+                    Console.WriteLine("Crm ja existe");
+                    xx = false;
+                }
+            });
+            if(xx){
+                medico.Crm = Crm;
+            }
         }catch(Exception){
             Console.WriteLine("CRM informado invalido");
+            return false;
         }
-        return new Medico();
+        medicos.Add(new Medico());
+        return true;
+        }
     }
 }
