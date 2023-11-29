@@ -7,7 +7,7 @@ public class AppMedico
         var xx  = true;
         try{
             Console.WriteLine("Digite o nome do medico");
-            var Nome = Console.ReadLine()!;
+            medico.Nome = Console.ReadLine()!;
         }catch(Exception){
             Console.WriteLine("Nome invalido");
             return;
@@ -32,7 +32,7 @@ public class AppMedico
         }
         try{
             Console.WriteLine("Digite a data de nascimento do medico (dd/MM/yyyy): ");
-            var DataNascimento = DateTime.Parse(Console.ReadLine()!);
+            medico.DataNascimento = DateTime.Parse(Console.ReadLine()!);
         }catch(Exception){
             Console.WriteLine("Data de nascimento invalida");
             return;
